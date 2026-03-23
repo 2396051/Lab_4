@@ -1,18 +1,18 @@
 <?php
 require_once("classThermistor.php");
 
-$Vadc = $_GET['Vadc'];
-$Vcc  = $_GET['Vcc'];
-$Rdiv = $_GET['Rdiv'];  
-echo"Vadc: $Vadc <br>";
-$Ther = new Thermistor($Vcc, $Rdiv, $Vadc);
+$Vadc = $_GET['Vadc'] ?? 2.5;
+$Vcc  = $_GET['Vcc'] ?? 5;
+$Rdiv = $_GET['Rdiv'] ?? 10;
 
-$Ther->vcc=5;
-$Ther->Rdiv=5;
-$Ther->Vadc=$Vadc;
+$Ther = new Thermistor();
+$Ther->setVadc($Vadc);
+$Ther->setVcc($Vcc);
+$Ther->setRdiv($Rdiv);
 
+$temp = $Ther->calculTemperature("C");
 
-$temp=$Ther->calculTemperature();
+//echo "Température = " . round($temp, 2) . " °C";
 
-echo "Temperature = " . $temp . " °C";
-?>   
+echo round($temp, 2);
+?>
