@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Labo 4B</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+
+        $("#Vadc").on("input", function(){
+            $("#valeurVadc").text($(this).val() + " V");
+        });
+
+        function calculerTemperature(){
+            $.get("Conversion.php",
+            {
+                Vcc: $("#Vcc").val(),
+                Rdiv: $("#Rdiv").val(),
+                Vadc: $("#Vadc").val(),
+                unit: $("input[name='unit']:checked").val()
+            },
+            function(reponse){
+                $("#temperature").val(reponse);
+            });
+        }
+
+        $("#btnCalcul").click(calculerTemperature);
+    });
+    </script>
+</head>
+<body>
+
+<h1>Laboratoire 4B</h1>
+
+<label for="Vcc">Vcc :</label>
+<select id="Vcc">
+    <option value="24">+24V</option>
+    <option value="12">+12V</option>
+    <option value="10">+10V</option>
+    <option value="5" selected>+5V</option>
+    <option value="3.3">+3.3V</option>
+</select>
+
+<br><br>
+
+<label for="Rdiv">Rdiv :</label>
+<input type="number" id="Rdiv" value="10" step="0.1">
+
+<br><br>
+
+<label for="Vadc">Vadc :</label>
+<input type="range" id="Vadc" min="0" max="5" step="0.01" value="2.5">
+<span id="valeurVadc">2.5 V</span>
+
+<br><br>
+
+<label>Unité :</label>
+<input type="radio" name="unit" value="C" checked> °C
+<input type="radio" name="unit" value="F"> °F
+<input type="radio" name="unit" value="K"> °K
+
+<input type="button" id="btnCalcul" value="Calcul">
+
+<br><br>
+
+<label for="temperature">Température :</label>
+<input type="text" id="temperature" readonly>
+
+</body>
+</html>

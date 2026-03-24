@@ -59,7 +59,7 @@ class Thermistor
     return $this->Rt;
     }
 
-    public function calculTemperature($unite)
+    public function calculTemperature()
     {
     $Rt = $this->calculRt();
 
