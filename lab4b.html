@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Labo 4B</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <script>
     $(document).ready(function(){
-
-        $("#Vadc").on("input", function(){
-            $("#valeurVadc").text($(this).val() + " V");
-        });
 
         function calculerTemperature(){
             $.get("Conversion.php",
@@ -24,7 +21,12 @@
             });
         }
 
-        $("#btnCalcul").click(calculerTemperature);
+        $("#Vcc").change(calculerTemperature);
+        $("#Rdiv").on("input change", calculerTemperature);
+        $("#Vadc").on("input change", calculerTemperature);
+        $("input[name='unit']").change(calculerTemperature);
+
+        calculerTemperature();
     });
     </script>
 </head>
@@ -58,8 +60,6 @@
 <input type="radio" name="unit" value="C" checked> °C
 <input type="radio" name="unit" value="F"> °F
 <input type="radio" name="unit" value="K"> °K
-
-<input type="button" id="btnCalcul" value="Calcul">
 
 <br><br>
 
