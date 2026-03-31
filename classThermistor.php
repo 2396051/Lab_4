@@ -51,8 +51,8 @@ class Thermistor
 
     public function calculRt()
     {
-    if ($this->Vcc == $this->Vadc) {
-        return 0;
+        if ($this->Vadc >= $this->Vcc) {
+        return 999999;
     }
 
     $this->Rt = $this->Vadc * $this->Rdiv / ($this->Vcc - $this->Vadc);

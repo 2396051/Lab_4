@@ -20,6 +20,11 @@
                 $("#temperature").val(reponse);
             });
         }
+        
+        $("#Vadc").on("input change", function(){
+            $("#valeurVadc").text($(this).val() + " V");
+            calculerTemperature();
+        });
 
         $("#Vcc").change(calculerTemperature);
         $("#Rdiv").on("input change", calculerTemperature);
